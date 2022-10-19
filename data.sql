@@ -61,3 +61,60 @@ SELECT MIN(weight_kg) as min_weight, MAX(weight_kg) as max_weight, species FROM 
 SELECT AVG(escape_attempts) as escape_AVG, species FROM animals WHERE date_of_birth BETWEEN '01-01-1990' AND '31-12-2000' GROUP BY species;
 
 
+
+/*-------------------THIRD DAY-------------*/
+BEGIN;
+INSERT INTO owners (full_name, age)
+VALUES
+('Sam Smith', 34),
+('Jennifer Orwell', 19),
+('Bob', 45),
+('Melody Pond', 77),
+('Dean Winchester', 14),
+('Jodi Whittaker', 38);
+
+BEGIN;
+INSERT INTO species (name)
+VALUES
+('Pokemon'),
+('Digimon');
+
+SELECT * FROM species;
+
+COMMIT;
+
+/*Set species*/
+BEGIN;
+UPDATE animals
+SET species_id=4
+WHERE name LIKE '%mon';
+
+SELECT * FROM animals;
+
+UPDATE animals
+SET species_id=3
+WHERE species_id ISNULL;
+
+SELECT * FROM animals;
+
+/*Set Owners*/
+BEGIN;
+UPDATE animals
+SET owner_id=7
+WHERE name='Agumon';
+
+UPDATE animals
+SET owner_id=8
+WHERE name='Gabumon' or name='Pikachu';
+
+UPDATE animals
+SET owner_id=9
+WHERE name='Devimon' or name='Plantmon';
+
+UPDATE animals
+SET owner_id=10
+WHERE name='Charmander' or name='Squirtle' or name='Blossom';
+
+UPDATE animals
+SET owner_id=11
+WHERE name='Angemon' or name='Boarmon';
