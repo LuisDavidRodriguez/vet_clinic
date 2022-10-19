@@ -9,3 +9,8 @@ vet_clinic(# neutered BOOLEAN DEFAULT false,
 vet_clinic(# weight_kg FLOAT DEFAULT 0
 vet_clinic(# );
 CREATE TABLE
+           
+ALTER TABLE animals
+ADD species VARCHAR(20) NOT NULL DEFAULT '0'
+;
+
