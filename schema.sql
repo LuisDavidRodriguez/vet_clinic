@@ -111,7 +111,7 @@ CREATE TABLE join_visits(
   animals_id INT,
   vets_id INT,
   visit_date date,
-  PRIMARY KEY (animals_id, vets_id),
+  PRIMARY KEY (animals_id, vets_id, visit_date),
   CONSTRAINT animals_visits
   FOREIGN KEY(animals_id)
     REFERENCES animals(id)
@@ -124,8 +124,14 @@ ALTER TABLE join_visits
   ON DELETE CASCADE
 ;
 
-/*SINCE I FORGOT TO ADD THE DATE AND 
-ALSO SET IT AS A PRIMARY KEY BECAUSE 
+/*SINCE I FORGOT TO ADD THE DATE >.<
+well in the upper code I added the date jaja but 
+in the real life I had forgotten it
+so I used this codes to first delete the constraint
+because was only taking animals_id and vets_id
+then I added the column date and finally I just create 
+the constrain again now with the 3 columns
+AND ALSO SET IT AS A PRIMARY KEY BECAUSE 
 THERE COULD BE THE SAME POKEMON VISITING 
 THE SAME VET BUT IN DIFFERENT DATES*/
 --Drop the previous constrint
