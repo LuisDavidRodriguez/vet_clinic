@@ -62,3 +62,78 @@ REFERENCES species (id)
 ON DELETE CASCADE;
 
 COMMIT;
+
+
+/*-----------forth day---------------*/
+/*
+Create a table named vets with the following columns:
+id: integer (set it as autoincremented PRIMARY KEY)
+name: string
+age: integer
+date_of_graduation: date
+*/
+BEGIN;
+CREATE TABLE vets (
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name VARCHAR(30) NOT NULL DEFAULT '0',
+  age INT,
+  date_of_graduation date
+);
+
+/*There is a many-to-many relationship between the 
+tables species and vets: a vet can specialize in multiple species,
+and a species can have multiple vets specialized in it. Create a "join table"
+called specializations to handle this relationship.*/
+
+CREATE TABLE join_specializations(
+  species_id INT,
+  vets_id INT,
+  PRIMARY KEY (species_id, vets_id)
+);
+
+ALTER TABLE join_specializations
+ADD FOREIGN KEY (species_id) REFERENCES species(id)
+ON DELETE CASCADE
+;
+
+ALTER TABLE join_specializations
+ADD FOREIGN KEY (vets_id) REFERENCES vets(id)
+ON DELETE CASCADE
+;
+COMMIT;
+
+/*There is a many-to-many relationship between the tables animals
+ and vets: an animal can visit multiple vets and one vet can be 
+ visited by multiple animals. Create a "join table" called visits 
+ to handle this relationship, it should also keep track of the date of the visit.*/
+
+CREATE TABLE join_visits(
+  animals_id INT,
+  vets_id INT,
+  visit_date date,
+  PRIMARY KEY (animals_id, vets_id),
+  CONSTRAINT animals_visits
+  FOREIGN KEY(animals_id)
+    REFERENCES animals(id)
+    ON DELETE CASCADE 
+);
+
+ALTER TABLE join_visits
+  ADD FOREIGN KEY(vets_id)
+  REFERENCES vets(id)
+  ON DELETE CASCADE
+;
+
+/*SINCE I FORGOT TO ADD THE DATE AND 
+ALSO SET IT AS A PRIMARY KEY BECAUSE 
+THERE COULD BE THE SAME POKEMON VISITING 
+THE SAME VET BUT IN DIFFERENT DATES*/
+--Drop the previous constrint
+ALTER TABLE join_visits
+DROP CONSTRAINT join_visits_pkey; 
+
+--add the date column
+
+-- set the date column as part of the primary key
+ALTER TABLE join_visits
+PRIMARY KEY (animals_id, vets_id, visit_date); 
