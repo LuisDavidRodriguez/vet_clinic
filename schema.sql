@@ -143,3 +143,19 @@ DROP CONSTRAINT join_visits_pkey;
 -- set the date column as part of the primary key
 ALTER TABLE join_visits
 PRIMARY KEY (animals_id, vets_id, visit_date); 
+
+
+
+/*-----------testing speed---------------*/
+/*There is an issue with this query or datetype is just date
+and they want to add a lot of items with the same date, but different 
+hour and seconds, thus or constrain complaints because there are duplicate
+values, so you must change the date type for hour
+*/
+DELETE FROM join_visits;
+
+ALTER TABLE join_visits
+ALTER COLUMN visit_date SET DATA TYPE TIMESTAMP WITH TIME ZONE;
+CREATE INDEX animals_id_desc ON join_visits(animals_id DESC);
+CREATE INDEX vets_id_desc ON join_visits(vets_id DESC);
+CREATE INDEX owners_email_desec ON owners(email DESC);

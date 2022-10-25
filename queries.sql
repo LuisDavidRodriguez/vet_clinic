@@ -33,6 +33,8 @@ LEFT JOIN animals A ON O.id = A.owner_id;
 SELECT COUNT(*), S.name
 FROM species S
 JOIN animals A ON S.id = A.species_id
+
+
 GROUP BY S.name;
 
 /*List all Digimon owned by Jennifer Orwell.*/
@@ -207,3 +209,8 @@ WHERE V.name = 'Maisy Smith'
 GROUP BY S.name
 ORDER BY count DESC LIMIT 1
 ;
+
+speed---------------*/
+explain analyze SELECT COUNT(*) FROM join_visits where animals_id = 4;
+explain analyze SELECT * FROM join_visits where vets_id = 2;
+explain analyze SELECT * FROM owners where email = 'owner_18327@mail.com';
